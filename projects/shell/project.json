@@ -1,0 +1,116 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "shell",
+  "projectType": "application",
+  "generators": {},
+  "sourceRoot": "projects/shell/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/shell",
+        "index": "projects/shell/src/index.html",
+        "main": "projects/shell/src/main.ts",
+        "polyfills": "projects/shell/src/polyfills.ts",
+        "tsConfig": "projects/shell/tsconfig.app.json",
+        "assets": [
+          "projects/shell/src/favicon.ico",
+          "projects/shell/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/purple-green.css"
+        ],
+        "scripts": [],
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "projects/shell/src/environments/environment.ts",
+              "with": "projects/shell/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        }
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": ""
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "shell:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "shell:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "shell:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "projects/shell/src/test.ts",
+        "polyfills": "projects/shell/src/polyfills.ts",
+        "tsConfig": "projects/shell/tsconfig.spec.json",
+        "karmaConfig": "projects/shell/karma.conf.js",
+        "assets": [
+          "projects/shell/src/favicon.ico",
+          "projects/shell/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/purple-green.css"
+        ],
+        "scripts": []
+      },
+      "outputs": [
+        "coverage/projects/shell"
+      ]
+    },
+    "e2e": {
+      "executor": "@angular-devkit/build-angular:protractor",
+      "options": {
+        "protractorConfig": "projects/shell/e2e/protractor.conf.js",
+        "devServerTarget": "shell:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "shell:serve:production"
+        }
+      }
+    }
+  }
+}
