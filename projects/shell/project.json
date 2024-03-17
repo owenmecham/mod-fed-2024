@@ -7,7 +7,7 @@
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@nx/angular:webpack-browser",
       "options": {
         "outputPath": "dist/shell",
         "index": "projects/shell/src/index.html",
@@ -27,7 +27,11 @@
         "buildOptimizer": false,
         "sourceMap": true,
         "optimization": false,
-        "namedChunks": true
+        "namedChunks": true,
+        "customWebpackConfig": {
+          "path": "projects/shell/webpack.config.js"
+        },
+        "commonChunk": false
       },
       "configurations": {
         "production": {
@@ -55,7 +59,10 @@
               "maximumWarning": "6kb",
               "maximumError": "10kb"
             }
-          ]
+          ],
+          "customWebpackConfig": {
+            "path": "projects/shell/webpack.prod.config.js"
+          }
         }
       },
       "outputs": [
@@ -64,9 +71,11 @@
       "defaultConfiguration": ""
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:dev-server",
       "options": {
-        "browserTarget": "shell:build"
+        "browserTarget": "shell:build",
+        "port": 5001,
+        "publicHost": "http://localhost:5001"
       },
       "configurations": {
         "production": {
@@ -75,9 +84,10 @@
       }
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "ngx-build-plus:extract-i18n",
       "options": {
-        "browserTarget": "shell:build"
+        "browserTarget": "shell:build",
+        "extraWebpackConfig": "projects/shell/webpack.config.js"
       }
     },
     "test": {

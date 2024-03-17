@@ -15,10 +15,12 @@
     "build": "npm run build:shell && npm run build:mfe1",
     "test": "nx test",
     "lint": "nx lint",
-    "e2e": "nx e2e"
+    "e2e": "nx e2e",
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/module-federation": "^17.0.8",
     "@angular/animations": "17.2.2",
     "@angular/cdk": "17.2.1",
     "@angular/common": "17.2.2",
@@ -29,12 +31,12 @@
     "@angular/platform-browser": "17.2.2",
     "@angular/platform-browser-dynamic": "17.2.2",
     "@angular/router": "17.2.2",
+    "@nx/workspace": "18.0.5",
     "concurrently": "^5.3.0",
     "prettier": "^2.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.5.0",
-    "zone.js": "~0.14.0",
-    "@nx/workspace": "18.0.5"
+    "zone.js": "~0.14.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "17.2.1",
@@ -63,4 +65,3 @@
     "typescript": "5.3.3"
   }
 }
-
