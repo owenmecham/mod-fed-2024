@@ -7,11 +7,10 @@
   "prefix": "mfe2",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@nx/angular:webpack-browser",
       "options": {
         "outputPath": "dist/mfe2",
         "index": "mfe2/src/index.html",
-        "browser": "mfe2/src/main.ts",
         "polyfills": [
           "zone.js"
         ],
@@ -23,7 +22,12 @@
         "styles": [
           "mfe2/src/styles.css"
         ],
-        "scripts": []
+        "scripts": [],
+        "main": "mfe2/src/main.ts",
+        "customWebpackConfig": {
+          "path": "mfe2/webpack.config.js"
+        },
+        "commonChunk": false
       },
       "configurations": {
         "production": {
@@ -39,7 +43,10 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "mfe2/webpack.prod.config.js"
+          }
         },
         "development": {
           "optimization": false,
@@ -50,7 +57,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "mfe2:build:production"
@@ -59,12 +66,17 @@
           "buildTarget": "mfe2:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 3001,
+        "publicHost": "http://localhost:3001"
+      }
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "ngx-build-plus:extract-i18n",
       "options": {
-        "buildTarget": "mfe2:build"
+        "buildTarget": "mfe2:build",
+        "extraWebpackConfig": "mfe2/webpack.config.js"
       }
     },
     "test": {
