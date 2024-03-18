@@ -1,0 +1,89 @@
+{
+  "name": "mfe2",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {},
+  "sourceRoot": "mfe2/src",
+  "prefix": "mfe2",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": "dist/mfe2",
+        "index": "mfe2/src/index.html",
+        "browser": "mfe2/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "mfe2/tsconfig.app.json",
+        "assets": [
+          "mfe2/src/favicon.ico",
+          "mfe2/src/assets"
+        ],
+        "styles": [
+          "mfe2/src/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "mfe2:build:production"
+        },
+        "development": {
+          "buildTarget": "mfe2:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "mfe2:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "mfe2/tsconfig.spec.json",
+        "assets": [
+          "mfe2/src/favicon.ico",
+          "mfe2/src/assets"
+        ],
+        "styles": [
+          "mfe2/src/styles.css"
+        ],
+        "scripts": []
+      }
+    }
+  }
+}
